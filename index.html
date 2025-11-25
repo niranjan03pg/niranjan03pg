@@ -2,17 +2,70 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Personal Website</title>
+<title>Niranjan Gadagane - Personal Website</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    body{
-        margin:0;
+    :root {
+        --primary-color: #00eaff;
+        --secondary-color: #0d1117;
+        --accent-color: #1f2937;
+        --text-color: white;
+        --card-bg: #1b2330cc;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
         font-family: 'Poppins', sans-serif;
-        background:#0d1117;
-        color:white;
-        overflow-x:hidden;
+        background: var(--secondary-color);
+        color: var(--text-color);
+        overflow-x: hidden;
         position: relative;
+        min-height: 100vh;
+    }
+
+    /* ===== BINARY BACKGROUND ANIMATION ===== */
+    .binary-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -3;
+        opacity: 0.1;
+    }
+    
+    .binary-digit {
+        position: absolute;
+        color: var(--primary-color);
+        font-family: monospace;
+        font-size: 16px;
+        opacity: 0;
+        animation: binaryFloat 15s linear infinite;
+    }
+    
+    @keyframes binaryFloat {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 0.7;
+        }
+        90% {
+            opacity: 0.7;
+        }
+        100% {
+            transform: translateY(-100px) rotate(360deg);
+            opacity: 0;
+        }
     }
 
     /* ===== ANIMATED GRADIENT BACKGROUND ===== */
@@ -23,11 +76,12 @@
         left:0;
         width:100%;
         height:100%;
-        background: linear-gradient(135deg, #0d1117, #1f2937, #0d1b2a);
+        background: linear-gradient(135deg, var(--secondary-color), var(--accent-color), #0d1b2a);
         background-size: 300% 300%;
         animation: gradientMove 12s ease infinite;
-        z-index: -3;
+        z-index: -4;
     }
+    
     @keyframes gradientMove {
         0%{ background-position: 0% 50%; }
         50%{ background-position: 100% 50%; }
@@ -41,176 +95,367 @@
         overflow: hidden;
         z-index: -2;
     }
+    
     .particles span {
         position: absolute;
         width: 6px;
         height: 6px;
-        background: #00eaff;
+        background: var(--primary-color);
         border-radius: 50%;
-        box-shadow: 0 0 10px #00eaff;
+        box-shadow: 0 0 10px var(--primary-color);
         opacity: 0.7;
         animation: floatUp linear infinite;
     }
+    
     @keyframes floatUp {
         0% { transform: translateY(100vh) scale(0.5); }
         100% { transform: translateY(-10vh) scale(1); }
     }
 
     /* ===== STARFIELD EFFECT ===== */
-    body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: url("b.jpg") repeat;
-    opacity: 0.13;
-    animation: starsMove 45s linear infinite;
-    z-index: -1;
-    pointer-events: none;
-}
-
-    @keyframes starsMove {
-        from { transform: translateY(0); }
-        to { transform: translateY(-1000px); }
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
+    
+    .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        animation: twinkle 5s infinite;
+    }
+    
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 1; }
     }
 
-    header{
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
+    /* ===== HEADER STYLES ===== */
+    header {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         animation: fadeIn 1.5s ease-in-out;
+        position: relative;
     }
-
-    h1{
-        font-size:55px;
-        font-weight:700;
-        margin:0;
+    
+    .header-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    h1 {
+        font-size: 55px;
+        font-weight: 700;
+        margin: 0;
         animation: slideDown 1.5s;
+        text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
     }
-
+    
     /* Typing Animation */
-    .typing{
-        color:#00eaff;
-        border-right:3px solid #00eaff;
-        display:inline-block;
-        white-space:nowrap;
-        overflow:hidden;
-        animation: typing 6s steps(30) infinite alternate;
-        font-size:30px;
-        margin-top:10px;
+    .typing {
+        color: var(--primary-color);
+        border-right: 3px solid var(--primary-color);
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: typing 4s steps(30) infinite alternate;
+        font-size: 30px;
+        margin-top: 10px;
     }
-    @keyframes typing{
-        0%{ width: 0ch; }
-        100%{ width: 30ch; }
+    
+    @keyframes typing {
+        0% { width: 0ch; }
+        100% { width: 30ch; }
+    }
+    
+    @keyframes slideDown {
+        from { transform: translateY(-40px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
-    @keyframes slideDown{
-        from{ transform:translateY(-40px); opacity:0; }
-        to{ transform:translateY(0); opacity:1; }
-    }
-
-    @keyframes fadeIn{
-        from{ opacity:0; }
-        to{ opacity:1; }
-    }
-
-    section{
-        padding:70px 10%;
+    /* ===== SECTION STYLES ===== */
+    section {
+        padding: 70px 10%;
         animation: fadeIn 1.2s ease-in-out;
+        position: relative;
+        z-index: 1;
     }
-
-    h2{
-        font-size:40px;
-        margin-bottom:30px;
-        border-left:6px solid #00eaff;
-        padding-left:15px;
+    
+    h2 {
+        font-size: 40px;
+        margin-bottom: 30px;
+        border-left: 6px solid var(--primary-color);
+        padding-left: 15px;
+        position: relative;
+        overflow: hidden;
     }
-
-    .biodata p{
-        font-size:18px;
-        line-height:1.8;
+    
+    h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-color), transparent);
+        animation: h2Underline 3s infinite;
+    }
+    
+    @keyframes h2Underline {
+        0%, 100% { transform: translateX(-100%); }
+        50% { transform: translateX(100%); }
+    }
+    
+    .biodata p {
+        font-size: 18px;
+        line-height: 1.8;
+        margin-bottom: 10px;
+        position: relative;
+        padding-left: 20px;
+    }
+    
+    .biodata p::before {
+        content: "▹";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
     }
 
     /* Skills Animation */
-    .skill{
-        margin:20px 0;
+    .skill {
+        margin: 20px 0;
     }
-    .bar{
-        height:12px;
-        background:#222;
-        border-radius:10px;
-        overflow:hidden;
+    
+    .skill-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
     }
-    .bar-fill{
-        height:12px;
-        width:0;
-        border-radius:10px;
-        background:#00eaff;
+    
+    .bar {
+        height: 12px;
+        background: #222;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .bar::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 234, 255, 0.2), transparent);
+        animation: barShine 3s infinite;
+    }
+    
+    @keyframes barShine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+    
+    .bar-fill {
+        height: 12px;
+        width: 0;
+        border-radius: 10px;
+        background: var(--primary-color);
         animation: fill 2.5s forwards;
+        box-shadow: 0 0 10px var(--primary-color);
+        position: relative;
+        z-index: 1;
     }
-    @keyframes fill{
-        from{ width:0; }
-        to{ width: var(--percent); }
+    
+    @keyframes fill {
+        from { width: 0; }
+        to { width: var(--percent); }
     }
 
     /* Card Style */
-    .cards{
-        display:grid;
-        grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-        gap:25px;
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
     }
-    .card{
-        background:#1b2330cc;
-        padding:25px;
-        border-radius:10px;
-        transition: transform .3s, box-shadow .3s;
+    
+    .card {
+        background: var(--card-bg);
+        padding: 25px;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
         backdrop-filter: blur(5px);
+        border: 1px solid rgba(0, 234, 255, 0.1);
+        position: relative;
+        overflow: hidden;
     }
-    .card:hover{
-        transform:translateY(-10px);
-        box-shadow:0 15px 25px rgba(0,0,0,0.4);
+    
+    .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 234, 255, 0.1), transparent);
+        transition: left 0.5s;
+    }
+    
+    .card:hover::before {
+        left: 100%;
+    }
+    
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+        border-color: rgba(0, 234, 255, 0.3);
+    }
+    
+    .card h3 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .card h3::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s;
+    }
+    
+    .card:hover h3::after {
+        width: 100%;
     }
 
-    footer{
-        text-align:center;
-        padding:20px;
-        background:#11161dcc;
-        margin-top:40px;
-        color:#aaa;
-        backdrop-filter: blur(4px);
+    /* Social Links */
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 20px;
     }
-    a{
-        color:#00eaff;
-        text-decoration:none;
+    
+    .social-link {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 20px;
+        background: rgba(0, 234, 255, 0.1);
+        border-radius: 5px;
+        transition: all 0.3s;
+        border: 1px solid rgba(0, 234, 255, 0.2);
+    }
+    
+    .social-link:hover {
+        background: rgba(0, 234, 255, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 234, 255, 0.2);
+    }
+    
+    .social-link i {
+        margin-right: 8px;
+        font-size: 18px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #11161dcc;
+        margin-top: 40px;
+        color: #aaa;
+        backdrop-filter: blur(4px);
+        position: relative;
+        z-index: 1;
+    }
+    
+    a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    
+    a:hover {
+        color: white;
+        text-shadow: 0 0 5px var(--primary-color);
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 40px;
+        }
+        
+        .typing {
+            font-size: 24px;
+        }
+        
+        h2 {
+            font-size: 32px;
+        }
+        
+        section {
+            padding: 50px 5%;
+        }
+        
+        .social-links {
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 32px;
+        }
+        
+        .typing {
+            font-size: 18px;
+        }
+        
+        h2 {
+            font-size: 28px;
+        }
+        
+        .cards {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
+<!-- BINARY BACKGROUND -->
+<div class="binary-bg" id="binaryBg"></div>
+
+<!-- STARFIELD -->
+<div class="stars" id="stars"></div>
+
 <!-- PARTICLES -->
-<div class="particles">
-    <!-- 25 floating particles -->
-    <script>
-        for(let i=0;i<25;i++){
-            let p=document.createElement("span");
-            let size=Math.random()*8+4;
-            let left=Math.random()*100;
-            let duration=Math.random()*10+8;
-            let delay=Math.random()*5;
-            p.style.width=size+"px";
-            p.style.height=size+"px";
-            p.style.left=left+"vw";
-            p.style.animationDuration=duration+"s";
-            p.style.animationDelay=delay+"s";
-            document.querySelector(".particles").appendChild(p);
-        }
-    </script>
-</div>
+<div class="particles" id="particles"></div>
 
 <header>
-    <div>
+    <div class="header-content">
         <h1>Hello, I'm <span style="color:#00eaff;">Niranjan Gadagane</span></h1>
         <div class="typing">Student | Explorer | Tech Enthusiast</div>
     </div>
@@ -233,22 +478,34 @@
     <h2>My Skills</h2>
 
     <div class="skill">
-        <p>Team Work</p>
-        <div class="bar"><div class="bar-fill" style="--percent:91%;"></div></div>
+        <div class="skill-header">
+            <p>Team Work</p>
+            <span>97%</span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="--percent:97%;"></div></div>
     </div>
 
     <div class="skill">
-        <p>Time Management</p>
+        <div class="skill-header">
+            <p>Time Management</p>
+            <span>95%</span>
+        </div>
         <div class="bar"><div class="bar-fill" style="--percent:95%;"></div></div>
     </div>
 
     <div class="skill">
-        <p>Problem Solving</p>
+        <div class="skill-header">
+            <p>Problem-solving</p>
+            <span>82%</span>
+        </div>
         <div class="bar"><div class="bar-fill" style="--percent:82%;"></div></div>
     </div>
 
     <div class="skill">
-        <p>Communication</p>
+        <div class="skill-header">
+            <p>Communication</p>
+            <span>75%</span>
+        </div>
         <div class="bar"><div class="bar-fill" style="--percent:75%;"></div></div>
     </div>
 </section>
@@ -267,7 +524,7 @@
         </div>
 
         <div class="card">
-            <h3>Team Leadership</h3>
+            <h3>Clubs & Organizations</h3>
             <p>Leading small teams in college events, hackathons, and group technical projects.</p>
         </div>
     </div>
@@ -275,18 +532,126 @@
 
 <section>
     <h2>Connect With Me</h2>
-    <p>Email: <a href="mailto:niranajn@email.com">niranajn@email.com</a></p>
-    <p>LinkedIn: <a href="#">nirulinkedIn</a></p>
-    <p>GitHub: <a href="#">niranjan03.github</a></p>
-    <p>Instagram: <a href="#">Niranjan_Gadagane</a></p>
+    <div class="social-links">
+        <a href="mailto:niranajn@email.com" class="social-link">
+            <i class="fas fa-envelope"></i> Email
+        </a>
+        <a href="#" class="social-link">
+            <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="#" class="social-link">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="#" class="social-link">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+    </div>
 </section>
 
 <footer>
-    © 2025 Niranjan PG – All Rights Reserved.
+    © 2025 Niranjan Gadagane – All Rights Reserved.
 </footer>
+
+<script>
+    // Create binary background animation
+    function createBinaryBackground() {
+        const binaryBg = document.getElementById('binaryBg');
+        const digits = ['0', '1'];
+        
+        for (let i = 0; i < 100; i++) {
+            const digit = document.createElement('div');
+            digit.className = 'binary-digit';
+            digit.textContent = digits[Math.floor(Math.random() * digits.length)];
+            
+            // Random properties
+            const left = Math.random() * 100;
+            const delay = Math.random() * 15;
+            const duration = 10 + Math.random() * 20;
+            const size = 12 + Math.random() * 10;
+            
+            digit.style.left = `${left}vw`;
+            digit.style.animationDelay = `${delay}s`;
+            digit.style.animationDuration = `${duration}s`;
+            digit.style.fontSize = `${size}px`;
+            
+            binaryBg.appendChild(digit);
+        }
+    }
+    
+    // Create starfield
+    function createStarfield() {
+        const starsContainer = document.getElementById('stars');
+        
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // Random properties
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const size = Math.random() * 3;
+            const delay = Math.random() * 5;
+            const duration = 3 + Math.random() * 7;
+            
+            star.style.top = `${top}vh`;
+            star.style.left = `${left}vw`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.animationDelay = `${delay}s`;
+            star.style.animationDuration = `${duration}s`;
+            
+            starsContainer.appendChild(star);
+        }
+    }
+    
+    // Create floating particles
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        
+        for (let i = 0; i < 25; i++) {
+            let p = document.createElement("span");
+            let size = Math.random() * 8 + 4;
+            let left = Math.random() * 100;
+            let duration = Math.random() * 10 + 8;
+            let delay = Math.random() * 5;
+            
+            p.style.width = size + "px";
+            p.style.height = size + "px";
+            p.style.left = left + "vw";
+            p.style.animationDuration = duration + "s";
+            p.style.animationDelay = delay + "s";
+            
+            particlesContainer.appendChild(p);
+        }
+    }
+    
+    // Initialize all animations
+    document.addEventListener('DOMContentLoaded', function() {
+        createBinaryBackground();
+        createStarfield();
+        createParticles();
+        
+        // Add scroll animation to sections
+        const sections = document.querySelectorAll('section');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 1s ease-in-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
 
 </body>
 </html>
-
-
-
